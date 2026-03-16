@@ -14,11 +14,11 @@
 const TEMPLATES = [
   {
     id: 1, src: 'des/te1.jpg', fb: 'tf1', label: 'قالب ١',
-    text: { x: 0.5, y: 0.78, fs: 40, color: '#993b2e' }
+    text: { x: 0.5, y: 0.82, fs: 40, color: '#993b2e' }
   },
   {
     id: 2, src: 'des/te2.jpg', fb: 'tf2', label: 'قالب ٢',
-    text: { x: 0.5, y: 0.65, fs: 40, color: '#fcf8ec' }
+    text: { x: 0.5, y: 0.82, fs: 40, color: '#fcf8ec' }
   },
   {
     id: 3, src: 'des/te3.jpg', fb: 'tf3', label: 'قالب ٣',
