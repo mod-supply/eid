@@ -4,7 +4,7 @@
 ═══════════════════════════════════════════════════════ */
 
 const SUPABASE_URL = 'https://xnpubpmwwalvknrtrmjd.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_Fy68RT1C8D3NS5ofXHK8Dg_5xtYby4N';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhucHVicG13d2FsdmtucnRybWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3MTAyNjcsImV4cCI6MjA4OTI4NjI2N30.-uSLztdMSUejcOWG_Hdy6XSRNRG-DK6_8x6CNXFv78M';
 
 const SB_HEADERS = {
   'apikey':        SUPABASE_KEY,
