@@ -1,14 +1,10 @@
 /* ═══════════════════════════════════════════════════════
-   analytics.js
-   أضف هذا الملف في index.html قبل app.js:
-   <script src="analytics.js"></script>
-
-   ثم في app.js أضف سطرين فقط:
-   1. بعد generateCard    → trackEvent('generate', selectedTemplate, name)
-   2. بعد downloadCard    → trackEvent('download', selectedTemplate, nameInp.value)
+   analytics.js — يرسل الأحداث لـ Supabase مباشرة
 ═══════════════════════════════════════════════════════ */
 
-/* session مجهول — يُنشأ مرة واحدة لكل متصفح */
+const SUPABASE_URL = 'https://xnpubpmwwalvknrtrmjd.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhucHVicG13d2FsdmtucnRybWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3MTAyNjcsImV4cCI6MjA4OTI4NjI2N30.-uSLztdMSUejcOWG_Hdy6XSRNRG-DK6_8x6CNXFv78M'; // ← ضع هنا الـ anon key من Legacy
+
 const _GC_SESSION = (() => {
   let id = sessionStorage.getItem('_gc_sid');
   if (!id) {
@@ -20,29 +16,32 @@ const _GC_SESSION = (() => {
   return id;
 })();
 
-/**
- * trackEvent
- * @param {'generate'|'download'} action  نوع الحدث
- * @param {{ id, label }} template        القالب المختار
- * @param {string} enteredName            الاسم المدخل
- */
 async function trackEvent(action, template, enteredName) {
   if (!template) return;
   try {
-    await fetch('/api/track', {
-      method:  'POST',
+    await fetch(`${SUPABASE_URL}/rest/v1/events`, {
+      method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'x-session-id': _GC_SESSION
+        'apikey':        SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type':  'application/json',
+        'Prefer':        'return=minimal'
       },
       body: JSON.stringify({
-        templateId:   template.id,
-        templateName: template.label,
-        enteredName:  (enteredName || '').trim() || '—',
+        session_id:    _GC_SESSION,
+        template_id:   template.id,
+        template_name: template.label,
+        entered_name:  (enteredName || '').trim() || '—',
         action
       })
     });
-  } catch (_) {
-    /* إذا السيرفر ما شغّال — تجاهل بصمت، الموقع يكمل */
-  }
+  } catch (_) {}
 }
+```
+
+---
+
+**الملف يُحفظ في:**
+```
+معايدة الامداد/
+├── analytics.js   ← هنا، جنب index.html
