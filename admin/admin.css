@@ -27,6 +27,7 @@ html, body {
   background: var(--bg);
   font-family: var(--font);
   color: var(--text);
+   
   direction: rtl;
   -webkit-font-smoothing: antialiased;
 }
